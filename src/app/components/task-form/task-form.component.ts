@@ -51,6 +51,7 @@ export class TaskFormComponent {
   constructor() {
     effect(() => {
       const currentTask = this.task();
+      this.configureValidationMode(Boolean(currentTask));
 
       if (!currentTask) {
         this.form.reset({
@@ -74,7 +75,7 @@ export class TaskFormComponent {
   }
 
   submit(): void {
-    if (this.form.invalid) {
+    if (this.isCreateMode() && this.form.invalid) {
       this.form.markAllAsTouched();
       return;
     }
@@ -103,6 +104,10 @@ export class TaskFormComponent {
   }
 
   isInvalid(field: keyof typeof this.form.controls): boolean {
+    if (!this.isCreateMode()) {
+      return false;
+    }
+
     const control = this.form.controls[field];
     return control.invalid && control.touched;
   }
@@ -137,5 +142,33 @@ export class TaskFormComponent {
 
   descriptionLength(): number {
     return this.form.controls.description.value.length;
+  }
+
+  isCreateMode(): boolean {
+    return !this.task();
+  }
+
+  private configureValidationMode(isEditing: boolean): void {
+    const titleControl = this.form.controls.title;
+    const descriptionControl = this.form.controls.description;
+    const dueDateControl = this.form.controls.dueDate;
+
+    if (isEditing) {
+      titleControl.clearValidators();
+      descriptionControl.clearValidators();
+      dueDateControl.clearValidators();
+    } else {
+      titleControl.setValidators([Validators.required, Validators.minLength(3), Validators.maxLength(80)]);
+      descriptionControl.setValidators([
+        Validators.required,
+        Validators.minLength(10),
+        Validators.maxLength(300),
+      ]);
+      dueDateControl.setValidators([Validators.required, dueDateNotInPastValidator]);
+    }
+
+    titleControl.updateValueAndValidity({ emitEvent: false });
+    descriptionControl.updateValueAndValidity({ emitEvent: false });
+    dueDateControl.updateValueAndValidity({ emitEvent: false });
   }
 }

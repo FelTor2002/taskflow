@@ -1,28 +1,32 @@
 <form class="task-form" [formGroup]="form" (ngSubmit)="submit()">
   <div class="form-grid">
     <label>
-      <span>{{ i18n.t('title') }} *</span>
+      <span>{{ i18n.t('title') }} @if (isCreateMode()) { * }</span>
       <input
         formControlName="title"
         type="text"
         [placeholder]="i18n.t('titlePlaceholder')"
         [class.invalid]="isInvalid('title')"
       />
-      <small class="hint">{{ i18n.t('validationTitleHint') }} {{ titleLength() }}/80</small>
+      @if (isCreateMode()) {
+        <small class="hint">{{ i18n.t('validationTitleHint') }} {{ titleLength() }}/80</small>
+      }
       @if (isInvalid('title')) {
         <small class="error">{{ errorMessage('title') }}</small>
       }
     </label>
 
     <label>
-      <span>{{ i18n.t('description') }} *</span>
+      <span>{{ i18n.t('description') }} @if (isCreateMode()) { * }</span>
       <textarea
         formControlName="description"
         rows="3"
         [placeholder]="i18n.t('descriptionPlaceholder')"
         [class.invalid]="isInvalid('description')"
       ></textarea>
-      <small class="hint">{{ i18n.t('validationDescriptionHint') }} {{ descriptionLength() }}/300</small>
+      @if (isCreateMode()) {
+        <small class="hint">{{ i18n.t('validationDescriptionHint') }} {{ descriptionLength() }}/300</small>
+      }
       @if (isInvalid('description')) {
         <small class="error">{{ errorMessage('description') }}</small>
       }
@@ -47,9 +51,11 @@
     </label>
 
     <label>
-      <span>{{ i18n.t('dueDate') }} *</span>
+      <span>{{ i18n.t('dueDate') }} @if (isCreateMode()) { * }</span>
       <input formControlName="dueDate" type="date" [class.invalid]="isInvalid('dueDate')" />
-      <small class="hint">{{ i18n.t('validationDueDateHint') }}</small>
+      @if (isCreateMode()) {
+        <small class="hint">{{ i18n.t('validationDueDateHint') }}</small>
+      }
       @if (isInvalid('dueDate')) {
         <small class="error">{{ errorMessage('dueDate') }}</small>
       }
