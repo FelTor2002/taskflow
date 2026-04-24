@@ -1,45 +1,47 @@
 <form class="task-form" [formGroup]="form" (ngSubmit)="submit()">
   <div class="form-grid">
     <label>
-      <span>Title</span>
-      <input formControlName="title" type="text" placeholder="Write a task title" />
+      <span>{{ i18n.t('title') }}</span>
+      <input formControlName="title" type="text" [placeholder]="i18n.t('titlePlaceholder')" />
     </label>
 
     <label>
-      <span>Description</span>
+      <span>{{ i18n.t('description') }}</span>
       <textarea
         formControlName="description"
         rows="3"
-        placeholder="Describe your task"
+        [placeholder]="i18n.t('descriptionPlaceholder')"
       ></textarea>
     </label>
 
     <label>
-      <span>Status</span>
+      <span>{{ i18n.t('status') }}</span>
       <select formControlName="status">
         @for (status of statuses; track status) {
-          <option [value]="status">{{ status }}</option>
+          <option [value]="status">{{ statusLabel(status) }}</option>
         }
       </select>
     </label>
 
     <label>
-      <span>Priority</span>
+      <span>{{ i18n.t('priority') }}</span>
       <select formControlName="priority">
         @for (priority of priorities; track priority) {
-          <option [value]="priority">{{ priority }}</option>
+          <option [value]="priority">{{ priorityLabel(priority) }}</option>
         }
       </select>
     </label>
 
     <label>
-      <span>Due date</span>
+      <span>{{ i18n.t('dueDate') }}</span>
       <input formControlName="dueDate" type="date" />
     </label>
   </div>
 
   <div class="actions">
-    <button class="ghost" type="button" (click)="cancel.emit()">Cancel</button>
-    <button class="primary" type="submit">{{ task() ? 'Update task' : 'Create task' }}</button>
+    <button class="ghost" type="button" (click)="cancel.emit()">{{ i18n.t('cancel') }}</button>
+    <button class="primary" type="submit">
+      {{ task() ? i18n.t('updateTask') : i18n.t('createAction') }}
+    </button>
   </div>
 </form>
