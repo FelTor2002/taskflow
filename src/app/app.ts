@@ -1,13 +1,14 @@
 import { Component, computed, inject, signal } from '@angular/core';
 
 import { TaskCardComponent } from './components/task-card/task-card.component';
+import { TaskFiltersComponent, TaskFilterState } from './components/task-filters/task-filters.component';
 import { TaskFormComponent } from './components/task-form/task-form.component';
 import { Task } from './models/interfaces/task.model';
 import { TaskPayload, TaskService } from './services/task.service';
 
 @Component({
   selector: 'app-root',
-  imports: [TaskFormComponent, TaskCardComponent],
+  imports: [TaskFormComponent, TaskCardComponent, TaskFiltersComponent],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
@@ -15,11 +16,47 @@ export class App {
   private readonly taskService = inject(TaskService);
 
   readonly selectedTaskId = signal<string | null>(null);
+  readonly filters = signal<TaskFilterState>({
+    search: '',
+    status: 'all',
+    priority: 'all',
+    sort: 'createdAt-desc',
+  });
   readonly tasks = this.taskService.tasks;
 
   readonly selectedTask = computed(() =>
     this.tasks().find((task) => task.id === this.selectedTaskId()) ?? null,
   );
+  readonly visibleTasks = computed(() => {
+    const filters = this.filters();
+    const search = filters.search.trim().toLowerCase();
+
+    const filtered = this.tasks().filter((task) => {
+      const matchesSearch =
+        search.length === 0 ||
+        task.title.toLowerCase().includes(search) ||
+        task.description.toLowerCase().includes(search);
+
+      const matchesStatus = filters.status === 'all' || task.status === filters.status;
+      const matchesPriority = filters.priority === 'all' || task.priority === filters.priority;
+
+      return matchesSearch && matchesStatus && matchesPriority;
+    });
+
+    return filtered.sort((taskA, taskB) => {
+      if (filters.sort === 'createdAt-desc') {
+        return Date.parse(taskB.createdAt) - Date.parse(taskA.createdAt);
+      }
+      if (filters.sort === 'createdAt-asc') {
+        return Date.parse(taskA.createdAt) - Date.parse(taskB.createdAt);
+      }
+      if (filters.sort === 'dueDate-asc') {
+        return Date.parse(taskA.dueDate) - Date.parse(taskB.dueDate);
+      }
+
+      return Date.parse(taskB.dueDate) - Date.parse(taskA.dueDate);
+    });
+  });
 
   saveTask(payload: TaskPayload): void {
     const taskId = this.selectedTaskId();
@@ -54,5 +91,9 @@ export class App {
 
   toggleTaskCompletion(taskId: string): void {
     this.taskService.toggleCompleted(taskId);
+  }
+
+  updateFilters(state: TaskFilterState): void {
+    this.filters.set(state);
   }
 }
