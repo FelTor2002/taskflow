@@ -2,15 +2,15 @@
 
 Professional Angular + TypeScript task manager for portfolio use, focused on clean architecture, CRUD workflows, local persistence, responsive UI, and bilingual experience (ES/EN).
 
-Aplicación profesional de gestión de tareas con Angular + TypeScript para portafolio, enfocada en arquitectura limpia, flujos CRUD, persistencia local, UI responsive y experiencia bilingüe (ES/EN).
-
-## Demo
-
-- Live demo (placeholder): `https://taskflow-demo.vercel.app`
+Aplicación profesional de gestión de tareas con Angular + TypeScript para portafolio, enfocada en arquitectura limpia, flujos CRUD, persistencia local, interfaz responsive y experiencia bilingüe (ES/EN).
 
 ## Author
 
 - Felipe Torres
+
+## Demo
+
+- Production URL: `TBD after Vercel deploy`
 
 ## Tech Stack
 
@@ -29,8 +29,10 @@ Aplicación profesional de gestión de tareas con Angular + TypeScript para port
 - Sorting by creation date and due date
 - Persistent state in LocalStorage
 - Built-in language switcher (`ES` / `EN`)
+- Modal workflow for create/edit
+- Validation rules shown in create mode (with hints and character counters)
+- Edit mode without blocking validation hints to keep UX smoother
 - Responsive layout for desktop, tablet, and mobile
-- Confirmation dialog before deleting
 
 ## Funcionalidades (ES)
 
@@ -41,8 +43,10 @@ Aplicación profesional de gestión de tareas con Angular + TypeScript para port
 - Ordenamiento por fecha de creación y fecha límite
 - Persistencia en LocalStorage
 - Selector de idioma integrado (`ES` / `EN`)
+- Flujo de creación/edición con modal
+- Validaciones visibles en modo crear (con ayudas y contador de caracteres)
+- Edición sin mensajes de validación intrusivos para una UX más limpia
 - Diseño responsive para desktop, tablet y móvil
-- Confirmación antes de eliminar
 
 ## Project Structure
 
@@ -64,6 +68,7 @@ src/
     app.ts
     app.html
     app.css
+vercel.json
 ```
 
 ## Installation
@@ -72,37 +77,30 @@ src/
 npm install
 ```
 
-## Development Commands
+## Development
 
 ```bash
 # Run dev server
 npm run start
 
-# Production build
+# Build
 npm run build
 
-# Unit tests
+# Tests
 npm run test
 ```
 
-## Build
-
-```bash
-npm run build
-```
-
-Build output:
+## Build Output
 
 - `dist/taskflow/browser`
 
-## Vercel Deploy
+## Deploy on Vercel
 
-1. Push this project to GitHub.
-2. Import repository in Vercel.
-3. Use:
-   - Framework preset: `Other`
-   - Build command: `npm run build`
-   - Output directory: `dist/taskflow/browser`
+The project includes `vercel.json` and is ready to deploy:
+
+1. Link/import repository in Vercel.
+2. Build command: `npm run build`
+3. Output directory: `dist/taskflow/browser`
 4. Deploy.
 
 ## Future Improvements
@@ -111,4 +109,4 @@ Build output:
 - Advanced analytics dashboard
 - Tag system and smart filters
 - Cloud sync with backend auth
-- Automated test suite expansion (service + component interaction)
+- Expanded automated tests (services + components)
