@@ -1,0 +1,43 @@
+<section class="task-filters">
+  <label class="search">
+    <span>Search</span>
+    <input
+      type="search"
+      [ngModel]="state().search"
+      (ngModelChange)="onSearchChange($event)"
+      placeholder="Search by title or description"
+    />
+  </label>
+
+  <label>
+    <span>Status</span>
+    <select [ngModel]="state().status" (ngModelChange)="onStatusChange($event)">
+      <option value="all">All</option>
+      <option value="pending">Pending</option>
+      <option value="in-progress">In Progress</option>
+      <option value="completed">Completed</option>
+    </select>
+  </label>
+
+  <label>
+    <span>Priority</span>
+    <select [ngModel]="state().priority" (ngModelChange)="onPriorityChange($event)">
+      <option value="all">All</option>
+      <option value="low">Low</option>
+      <option value="medium">Medium</option>
+      <option value="high">High</option>
+    </select>
+  </label>
+
+  <label>
+    <span>Sort by</span>
+    <select [ngModel]="state().sort" (ngModelChange)="onSortChange($event)">
+      <option value="createdAt-desc">Newest created</option>
+      <option value="createdAt-asc">Oldest created</option>
+      <option value="dueDate-asc">Sooner due date</option>
+      <option value="dueDate-desc">Later due date</option>
+    </select>
+  </label>
+
+  <button type="button" (click)="resetFilters()">Clear filters</button>
+</section>
