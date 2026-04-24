@@ -141,6 +141,9 @@ h2 {
   place-items: center;
   z-index: 20;
   padding: 1rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.22s ease;
 }
 
 .modal-panel {
@@ -150,6 +153,21 @@ h2 {
   background: #0f172b;
   padding: 1rem;
   box-shadow: 0 18px 55px rgba(0, 0, 0, 0.45);
+  transform: translateY(20px) scale(0.98);
+  opacity: 0;
+  transition:
+    transform 0.24s ease,
+    opacity 0.24s ease;
+}
+
+.modal-backdrop.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-backdrop.is-open .modal-panel {
+  transform: translateY(0) scale(1);
+  opacity: 1;
 }
 
 .modal-head {

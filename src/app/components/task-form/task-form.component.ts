@@ -1,10 +1,27 @@
 import { CommonModule } from '@angular/common';
 import { Component, effect, inject, input, output } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 
 import { TASK_PRIORITIES, TASK_STATUSES, Task } from '../../models/interfaces/task.model';
 import { I18nService } from '../../services/i18n.service';
 import { TaskPayload } from '../../services/task.service';
+
+function dueDateNotInPastValidator(control: AbstractControl<string>): ValidationErrors | null {
+  const value = control.value;
+  if (!value) {
+    return null;
+  }
+
+  const selected = new Date(`${value}T00:00:00`);
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  if (selected < today) {
+    return { pastDate: true };
+  }
+
+  return null;
+}
 
 @Component({
   selector: 'app-task-form',
@@ -24,11 +41,11 @@ export class TaskFormComponent {
   readonly statuses = TASK_STATUSES;
 
   readonly form = this.fb.nonNullable.group({
-    title: ['', [Validators.required, Validators.maxLength(80)]],
-    description: ['', [Validators.required, Validators.maxLength(300)]],
+    title: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(80)]],
+    description: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(300)]],
     status: this.fb.nonNullable.control<Task['status']>('pending', [Validators.required]),
     priority: this.fb.nonNullable.control<Task['priority']>('medium', [Validators.required]),
-    dueDate: ['', [Validators.required]],
+    dueDate: ['', [Validators.required, dueDateNotInPastValidator]],
   });
 
   constructor() {
@@ -83,5 +100,34 @@ export class TaskFormComponent {
       return this.i18n.t('priorityMedium');
     }
     return this.i18n.t('priorityHigh');
+  }
+
+  isInvalid(field: keyof typeof this.form.controls): boolean {
+    const control = this.form.controls[field];
+    return control.invalid && (control.touched || control.dirty);
+  }
+
+  errorMessage(field: keyof typeof this.form.controls): string {
+    const control = this.form.controls[field];
+    const errors = control.errors;
+
+    if (!errors) {
+      return '';
+    }
+
+    if (errors['required']) {
+      return this.i18n.t('validationRequired');
+    }
+    if (errors['minlength']) {
+      return this.i18n.t('validationMinLength');
+    }
+    if (errors['maxlength']) {
+      return this.i18n.t('validationMaxLength');
+    }
+    if (errors['pastDate']) {
+      return this.i18n.t('validationDueDatePast');
+    }
+
+    return this.i18n.t('validationInvalidField');
   }
 }
