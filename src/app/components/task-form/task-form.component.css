@@ -57,6 +57,12 @@ select.invalid {
   line-height: 1.2;
 }
 
+.hint {
+  color: #8e99bc;
+  font-size: 0.75rem;
+  line-height: 1.2;
+}
+
 .actions {
   display: flex;
   justify-content: flex-end;

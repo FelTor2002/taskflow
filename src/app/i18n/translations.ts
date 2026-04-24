@@ -47,6 +47,9 @@ export const TRANSLATIONS = {
     validationMaxLength: 'Maximum length exceeded.',
     validationDueDatePast: 'Due date cannot be in the past.',
     validationInvalidField: 'Please review this field.',
+    validationTitleHint: 'Required. 3 to 80 characters.',
+    validationDescriptionHint: 'Required. 10 to 300 characters.',
+    validationDueDateHint: 'Required. Date cannot be earlier than today.',
   },
   es: {
     appTitle: 'Panel de Gesti\u00f3n de Tareas',
@@ -94,6 +97,9 @@ export const TRANSLATIONS = {
     validationMaxLength: 'Superaste la longitud m\u00e1xima.',
     validationDueDatePast: 'La fecha l\u00edmite no puede ser pasada.',
     validationInvalidField: 'Revisa este campo.',
+    validationTitleHint: 'Obligatorio. De 3 a 80 caracteres.',
+    validationDescriptionHint: 'Obligatorio. De 10 a 300 caracteres.',
+    validationDueDateHint: 'Obligatorio. La fecha no puede ser anterior a hoy.',
   },
 } as const;
 

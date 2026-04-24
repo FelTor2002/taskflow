@@ -104,7 +104,7 @@ export class TaskFormComponent {
 
   isInvalid(field: keyof typeof this.form.controls): boolean {
     const control = this.form.controls[field];
-    return control.invalid && (control.touched || control.dirty);
+    return control.invalid && control.touched;
   }
 
   errorMessage(field: keyof typeof this.form.controls): string {
@@ -129,5 +129,13 @@ export class TaskFormComponent {
     }
 
     return this.i18n.t('validationInvalidField');
+  }
+
+  titleLength(): number {
+    return this.form.controls.title.value.length;
+  }
+
+  descriptionLength(): number {
+    return this.form.controls.description.value.length;
   }
 }
