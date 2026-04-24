@@ -1,0 +1,77 @@
+:host {
+  --bg: #090d19;
+  --panel: #10182b;
+  --panel-border: #253250;
+  --text: #eff3ff;
+  --muted: #9da8c8;
+
+  min-height: 100dvh;
+  display: block;
+  color: var(--text);
+  background:
+    radial-gradient(circle at 0% 0%, rgba(54, 200, 240, 0.15), transparent 35%),
+    radial-gradient(circle at 95% 5%, rgba(108, 88, 255, 0.2), transparent 40%),
+    var(--bg);
+  font-family: 'DM Sans', 'Segoe UI', sans-serif;
+}
+
+.app-shell {
+  width: min(1100px, 92%);
+  margin: 0 auto;
+  padding: 2.5rem 0 3rem;
+  display: grid;
+  gap: 1rem;
+}
+
+.page-header,
+.panel {
+  background: color-mix(in srgb, var(--panel) 92%, transparent);
+  border: 1px solid var(--panel-border);
+  border-radius: 1.2rem;
+  padding: 1.2rem;
+}
+
+.eyebrow {
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #73d7f2;
+  font-weight: 700;
+}
+
+h1 {
+  margin: 0.35rem 0;
+  font-size: clamp(1.4rem, 3.5vw, 2rem);
+}
+
+.subtitle {
+  margin: 0;
+  color: var(--muted);
+}
+
+h2 {
+  margin: 0 0 0.9rem;
+}
+
+.task-grid {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.empty-state {
+  background: #141d33;
+  border: 1px dashed #3a4b75;
+  border-radius: 1rem;
+  padding: 1.3rem;
+  display: grid;
+  gap: 0.2rem;
+}
+
+.empty-state p {
+  margin: 0;
+  font-weight: 700;
+}
+
+.empty-state span {
+  color: var(--muted);
+}
