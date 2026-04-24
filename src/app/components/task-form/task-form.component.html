@@ -1,0 +1,45 @@
+<form class="task-form" [formGroup]="form" (ngSubmit)="submit()">
+  <div class="form-grid">
+    <label>
+      <span>Title</span>
+      <input formControlName="title" type="text" placeholder="Write a task title" />
+    </label>
+
+    <label>
+      <span>Description</span>
+      <textarea
+        formControlName="description"
+        rows="3"
+        placeholder="Describe your task"
+      ></textarea>
+    </label>
+
+    <label>
+      <span>Status</span>
+      <select formControlName="status">
+        @for (status of statuses; track status) {
+          <option [value]="status">{{ status }}</option>
+        }
+      </select>
+    </label>
+
+    <label>
+      <span>Priority</span>
+      <select formControlName="priority">
+        @for (priority of priorities; track priority) {
+          <option [value]="priority">{{ priority }}</option>
+        }
+      </select>
+    </label>
+
+    <label>
+      <span>Due date</span>
+      <input formControlName="dueDate" type="date" />
+    </label>
+  </div>
+
+  <div class="actions">
+    <button class="ghost" type="button" (click)="cancel.emit()">Cancel</button>
+    <button class="primary" type="submit">{{ task() ? 'Update task' : 'Create task' }}</button>
+  </div>
+</form>

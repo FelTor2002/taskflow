@@ -1,0 +1,22 @@
+<article class="task-card" [class.completed]="task().status === 'completed'">
+  <header>
+    <h3>{{ task().title }}</h3>
+    <span class="priority" [class]="'priority ' + task().priority">{{ task().priority }}</span>
+  </header>
+
+  <p>{{ task().description }}</p>
+
+  <div class="meta">
+    <span>Status: {{ task().status }}</span>
+    <span>Due: {{ task().dueDate | date: 'MMM d, y' }}</span>
+    <span>Created: {{ task().createdAt | date: 'MMM d, y' }}</span>
+  </div>
+
+  <footer>
+    <button type="button" (click)="toggleCompleted.emit(task().id)">
+      {{ task().status === 'completed' ? 'Reopen' : 'Complete' }}
+    </button>
+    <button type="button" (click)="edit.emit(task().id)">Edit</button>
+    <button class="danger" type="button" (click)="remove.emit(task().id)">Delete</button>
+  </footer>
+</article>
