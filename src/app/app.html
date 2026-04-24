@@ -2,29 +2,36 @@
   <header class="page-header">
     <div>
       <p class="eyebrow">TaskFlow</p>
-      <h1>Task Management Dashboard</h1>
-      <p class="subtitle">Manage your priorities with a clean workflow and clear status tracking.</p>
+      <h1>{{ i18n.t('appTitle') }}</h1>
+      <p class="subtitle">{{ i18n.t('appSubtitle') }}</p>
     </div>
+    <label class="language-selector">
+      <span>{{ i18n.t('language') }}</span>
+      <select [value]="i18n.language()" (change)="setLanguage($any($event.target).value)">
+        <option value="es">ES</option>
+        <option value="en">EN</option>
+      </select>
+    </label>
   </header>
 
   <section class="panel">
-    <h2>{{ selectedTask() ? 'Edit task' : 'Create task' }}</h2>
+    <h2>{{ selectedTask() ? i18n.t('editTask') : i18n.t('createTask') }}</h2>
     <app-task-form [task]="selectedTask()" (save)="saveTask($event)" (cancel)="cancelEdit()" />
   </section>
 
   <section class="panel">
-    <h2>Tasks</h2>
+    <h2>{{ i18n.t('tasks') }}</h2>
     <app-task-filters [state]="filters()" (stateChange)="updateFilters($event)" />
 
     @if (tasks().length === 0) {
       <div class="empty-state">
-        <p>No tasks yet.</p>
-        <span>Create your first task to start planning your workflow.</span>
+        <p>{{ i18n.t('noTasksTitle') }}</p>
+        <span>{{ i18n.t('noTasksDesc') }}</span>
       </div>
     } @else if (visibleTasks().length === 0) {
       <div class="empty-state">
-        <p>No matching tasks.</p>
-        <span>Adjust your search or filters to see more results.</span>
+        <p>{{ i18n.t('noResultsTitle') }}</p>
+        <span>{{ i18n.t('noResultsDesc') }}</span>
       </div>
     } @else {
       <div class="task-grid">

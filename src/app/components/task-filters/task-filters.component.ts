@@ -1,7 +1,8 @@
-import { Component, input, output } from '@angular/core';
+import { Component, inject, input, output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-import { TaskPriority, TaskStatus } from '../../models/interfaces/task.model';
+import { Task, TaskPriority, TaskStatus } from '../../models/interfaces/task.model';
+import { I18nService } from '../../services/i18n.service';
 
 export type TaskSort = 'createdAt-desc' | 'createdAt-asc' | 'dueDate-asc' | 'dueDate-desc';
 
@@ -19,6 +20,7 @@ export interface TaskFilterState {
   styleUrl: './task-filters.component.css',
 })
 export class TaskFiltersComponent {
+  readonly i18n = inject(I18nService);
   readonly state = input.required<TaskFilterState>();
   readonly stateChange = output<TaskFilterState>();
 
@@ -57,5 +59,25 @@ export class TaskFiltersComponent {
       priority: 'all',
       sort: 'createdAt-desc',
     });
+  }
+
+  statusLabel(status: Task['status']): string {
+    if (status === 'pending') {
+      return this.i18n.t('statusPending');
+    }
+    if (status === 'in-progress') {
+      return this.i18n.t('statusInProgress');
+    }
+    return this.i18n.t('statusCompleted');
+  }
+
+  priorityLabel(priority: Task['priority']): string {
+    if (priority === 'low') {
+      return this.i18n.t('priorityLow');
+    }
+    if (priority === 'medium') {
+      return this.i18n.t('priorityMedium');
+    }
+    return this.i18n.t('priorityHigh');
   }
 }

@@ -3,7 +3,9 @@ import { Component, computed, inject, signal } from '@angular/core';
 import { TaskCardComponent } from './components/task-card/task-card.component';
 import { TaskFiltersComponent, TaskFilterState } from './components/task-filters/task-filters.component';
 import { TaskFormComponent } from './components/task-form/task-form.component';
+import { Language } from './i18n/translations';
 import { Task } from './models/interfaces/task.model';
+import { I18nService } from './services/i18n.service';
 import { TaskPayload, TaskService } from './services/task.service';
 
 @Component({
@@ -14,6 +16,7 @@ import { TaskPayload, TaskService } from './services/task.service';
 })
 export class App {
   private readonly taskService = inject(TaskService);
+  readonly i18n = inject(I18nService);
 
   readonly selectedTaskId = signal<string | null>(null);
   readonly filters = signal<TaskFilterState>({
@@ -78,7 +81,7 @@ export class App {
   }
 
   deleteTask(task: Task): void {
-    const shouldDelete = confirm(`Delete "${task.title}"?`);
+    const shouldDelete = confirm(`${this.i18n.t('confirmDelete')} "${task.title}"`);
     if (!shouldDelete) {
       return;
     }
@@ -95,5 +98,9 @@ export class App {
 
   updateFilters(state: TaskFilterState): void {
     this.filters.set(state);
+  }
+
+  setLanguage(language: Language): void {
+    this.i18n.setLanguage(language);
   }
 }

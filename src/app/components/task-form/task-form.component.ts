@@ -3,6 +3,7 @@ import { Component, effect, inject, input, output } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 
 import { TASK_PRIORITIES, TASK_STATUSES, Task } from '../../models/interfaces/task.model';
+import { I18nService } from '../../services/i18n.service';
 import { TaskPayload } from '../../services/task.service';
 
 @Component({
@@ -13,6 +14,7 @@ import { TaskPayload } from '../../services/task.service';
 })
 export class TaskFormComponent {
   private readonly fb = inject(FormBuilder);
+  readonly i18n = inject(I18nService);
 
   readonly task = input<Task | null>(null);
   readonly cancel = output<void>();
@@ -61,5 +63,25 @@ export class TaskFormComponent {
     }
 
     this.save.emit(this.form.getRawValue());
+  }
+
+  statusLabel(status: Task['status']): string {
+    if (status === 'pending') {
+      return this.i18n.t('statusPending');
+    }
+    if (status === 'in-progress') {
+      return this.i18n.t('statusInProgress');
+    }
+    return this.i18n.t('statusCompleted');
+  }
+
+  priorityLabel(priority: Task['priority']): string {
+    if (priority === 'low') {
+      return this.i18n.t('priorityLow');
+    }
+    if (priority === 'medium') {
+      return this.i18n.t('priorityMedium');
+    }
+    return this.i18n.t('priorityHigh');
   }
 }
