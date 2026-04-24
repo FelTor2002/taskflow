@@ -62,6 +62,7 @@ footer {
   display: flex;
   gap: 0.5rem;
   flex-wrap: wrap;
+  justify-content: flex-end;
 }
 
 button {
@@ -77,4 +78,14 @@ button {
 button.danger {
   border-color: #8e3b5c;
   color: #ff95b0;
+}
+
+@media (max-width: 700px) {
+  footer {
+    justify-content: stretch;
+  }
+
+  button {
+    flex: 1;
+  }
 }

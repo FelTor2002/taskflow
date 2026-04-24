@@ -32,3 +32,9 @@ button {
   cursor: pointer;
   font-weight: 600;
 }
+
+@media (max-width: 700px) {
+  .task-filters {
+    grid-template-columns: 1fr;
+  }
+}
