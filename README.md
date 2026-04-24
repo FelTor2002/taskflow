@@ -10,7 +10,7 @@ Aplicación profesional de gestión de tareas con Angular + TypeScript para port
 
 ## Demo
 
-- Production URL: `TBD after Vercel deploy`
+- Production URL: `https://taskflow-nu-mocha.vercel.app`
 
 ## Tech Stack
 
