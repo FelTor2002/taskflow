@@ -15,12 +15,12 @@
   </header>
 
   <section class="panel">
-    <h2>{{ selectedTask() ? i18n.t('editTask') : i18n.t('createTask') }}</h2>
-    <app-task-form [task]="selectedTask()" (save)="saveTask($event)" (cancel)="cancelEdit()" />
-  </section>
-
-  <section class="panel">
-    <h2>{{ i18n.t('tasks') }}</h2>
+    <div class="panel-head">
+      <h2>{{ i18n.t('tasks') }}</h2>
+      <button class="primary-action" type="button" (click)="openCreateTaskModal()">
+        {{ i18n.t('createTask') }}
+      </button>
+    </div>
     <app-task-filters [state]="filters()" (stateChange)="updateFilters($event)" />
 
     @if (tasks().length === 0) {
@@ -47,3 +47,19 @@
     }
   </section>
 </main>
+
+@if (isTaskModalOpen()) {
+  <div class="modal-backdrop" (click)="closeTaskModal()">
+    <section class="modal-panel" (click)="$event.stopPropagation()">
+      <div class="modal-head">
+        <h2>{{ selectedTask() ? i18n.t('editTask') : i18n.t('createTask') }}</h2>
+        <button class="close-btn" type="button" (click)="closeTaskModal()">X</button>
+      </div>
+      <app-task-form
+        [task]="selectedTask()"
+        (save)="saveTask($event)"
+        (cancel)="closeTaskModal()"
+      />
+    </section>
+  </div>
+}

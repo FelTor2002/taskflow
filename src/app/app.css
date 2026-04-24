@@ -83,6 +83,29 @@ h2 {
   margin: 0 0 0.9rem;
 }
 
+.panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+  margin-bottom: 0.9rem;
+}
+
+.panel-head h2 {
+  margin: 0;
+}
+
+.primary-action {
+  border: 0;
+  border-radius: 0.8rem;
+  background: #36c8f0;
+  color: #03151f;
+  padding: 0.55rem 0.9rem;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
 .task-grid {
   display: grid;
   gap: 0.8rem;
@@ -109,6 +132,49 @@ h2 {
   color: var(--muted);
 }
 
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(3, 7, 18, 0.65);
+  backdrop-filter: blur(3px);
+  display: grid;
+  place-items: center;
+  z-index: 20;
+  padding: 1rem;
+}
+
+.modal-panel {
+  width: min(680px, 100%);
+  border-radius: 1.1rem;
+  border: 1px solid #2e3a5d;
+  background: #0f172b;
+  padding: 1rem;
+  box-shadow: 0 18px 55px rgba(0, 0, 0, 0.45);
+}
+
+.modal-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.7rem;
+  margin-bottom: 0.9rem;
+}
+
+.modal-head h2 {
+  margin: 0;
+}
+
+.close-btn {
+  border: 1px solid #3a476e;
+  border-radius: 0.65rem;
+  background: #18213a;
+  color: #f3f7ff;
+  width: 2rem;
+  height: 2rem;
+  font: inherit;
+  cursor: pointer;
+}
+
 @media (max-width: 600px) {
   .app-shell {
     width: min(100%, 94%);
@@ -121,5 +187,10 @@ h2 {
 
   .page-header {
     flex-direction: column;
+  }
+
+  .panel-head {
+    flex-direction: column;
+    align-items: stretch;
   }
 }

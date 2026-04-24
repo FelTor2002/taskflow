@@ -19,6 +19,7 @@ export class App {
   readonly i18n = inject(I18nService);
 
   readonly selectedTaskId = signal<string | null>(null);
+  readonly isTaskModalOpen = signal(false);
   readonly filters = signal<TaskFilterState>({
     search: '',
     status: 'all',
@@ -65,18 +66,25 @@ export class App {
     const taskId = this.selectedTaskId();
     if (taskId) {
       this.taskService.updateTask(taskId, payload);
-      this.selectedTaskId.set(null);
-      return;
+    } else {
+      this.taskService.addTask(payload);
     }
 
-    this.taskService.addTask(payload);
+    this.closeTaskModal();
   }
 
   editTask(taskId: string): void {
     this.selectedTaskId.set(taskId);
+    this.isTaskModalOpen.set(true);
   }
 
-  cancelEdit(): void {
+  openCreateTaskModal(): void {
+    this.selectedTaskId.set(null);
+    this.isTaskModalOpen.set(true);
+  }
+
+  closeTaskModal(): void {
+    this.isTaskModalOpen.set(false);
     this.selectedTaskId.set(null);
   }
 
@@ -88,7 +96,7 @@ export class App {
 
     this.taskService.deleteTask(task.id);
     if (this.selectedTaskId() === task.id) {
-      this.selectedTaskId.set(null);
+      this.closeTaskModal();
     }
   }
 
