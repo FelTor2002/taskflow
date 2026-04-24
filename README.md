@@ -1,55 +1,63 @@
 # TaskFlow
 
-Professional Angular + TypeScript task manager for portfolio use, focused on clean architecture, CRUD workflows, local persistence, responsive UI, and bilingual experience (ES/EN).
+> Aplicación de gestión de tareas moderna, bilingüe y responsive construida con Angular + TypeScript.
 
-Aplicación profesional de gestión de tareas con Angular + TypeScript para portafolio, enfocada en arquitectura limpia, flujos CRUD, persistencia local, interfaz responsive y experiencia bilingüe (ES/EN).
+[🇪🇸 Español](#-español) | [🇺🇸 English](#-english)
 
-## Author
+---
 
-- Felipe Torres
+## 🇪🇸 Español
 
-## Demo
+### Descripción
+**TaskFlow** es un proyecto de portafolio orientado a frontend, arquitectura limpia y UX.
+Incluye una interfaz tipo SaaS con tema oscuro, flujo CRUD completo, filtros, persistencia en LocalStorage y experiencia bilingüe.
 
-- Production URL: `https://taskflow-nu-mocha.vercel.app`
+### Demo local
+- URL: `http://localhost:4200` (o `http://localhost:4300` si 4200 está ocupado)
 
-## Tech Stack
+### Live demo
+- Vercel: [https://taskflow-nu-mocha.vercel.app](https://taskflow-nu-mocha.vercel.app)
 
-- Angular 21
+### Autor
+**Felipe Torres**
+
+### Funcionalidades principales
+- Gestión de tareas (CRUD):
+  - Crear tarea
+  - Editar tarea
+  - Eliminar tarea
+  - Completar / Reabrir tarea
+- Modelo de tarea:
+  - `id`, `title`, `description`, `status`, `priority`, `dueDate`, `createdAt`
+- Filtros y búsqueda:
+  - Búsqueda por título o descripción
+  - Filtro por estado
+  - Filtro por prioridad
+  - Orden por fecha de creación o vencimiento
+- Persistencia:
+  - Guardado automático en **LocalStorage**
+  - Restauración al recargar
+- Internacionalización (i18n):
+  - Español / Inglés
+  - Etiquetas de UI, estados y prioridades traducidas
+- UX/UI:
+  - Tema oscuro estilo productivity SaaS
+  - Modal para crear/editar tareas
+  - Confirmación antes de eliminar
+  - Animaciones suaves de modal
+  - Diseño responsive (desktop, tablet, móvil)
+- Validaciones:
+  - Validaciones explícitas en modo **crear**
+  - Edición sin validaciones intrusivas
+
+### Stack tecnológico
+- Angular (componentes standalone)
 - TypeScript
+- CSS moderno (variables, layout responsive, modal animations)
 - Reactive Forms
-- Modern CSS (dark SaaS-style UI)
 - LocalStorage
 
-## Features (EN)
-
-- Full CRUD task management: create, edit, delete, complete/reopen
-- Task model with `id`, `title`, `description`, `status`, `priority`, `dueDate`, `createdAt`
-- Search by title/description
-- Filters by status and priority
-- Sorting by creation date and due date
-- Persistent state in LocalStorage
-- Built-in language switcher (`ES` / `EN`)
-- Modal workflow for create/edit
-- Validation rules shown in create mode (with hints and character counters)
-- Edit mode without blocking validation hints to keep UX smoother
-- Responsive layout for desktop, tablet, and mobile
-
-## Funcionalidades (ES)
-
-- CRUD completo de tareas: crear, editar, eliminar, completar/reabrir
-- Modelo de tarea con `id`, `title`, `description`, `status`, `priority`, `dueDate`, `createdAt`
-- Búsqueda por título y descripción
-- Filtros por estado y prioridad
-- Ordenamiento por fecha de creación y fecha límite
-- Persistencia en LocalStorage
-- Selector de idioma integrado (`ES` / `EN`)
-- Flujo de creación/edición con modal
-- Validaciones visibles en modo crear (con ayudas y contador de caracteres)
-- Edición sin mensajes de validación intrusivos para una UX más limpia
-- Diseño responsive para desktop, tablet y móvil
-
-## Project Structure
-
+### Estructura del proyecto
 ```text
 src/
   app/
@@ -68,45 +76,93 @@ src/
     app.ts
     app.html
     app.css
+  styles.css
 vercel.json
 ```
 
-## Installation
-
+### Instalación
 ```bash
 npm install
 ```
 
-## Development
-
+### Ejecutar en local
 ```bash
-# Run dev server
-npm run start
-
-# Build
-npm run build
-
-# Tests
-npm run test
+npm start
 ```
 
-## Build Output
+### Build
+```bash
+npm run build
+```
 
-- `dist/taskflow/browser`
+### Tests
+```bash
+npx ng test --watch=false
+```
 
-## Deploy on Vercel
+### Flujo de ramas y commits recomendado
+Se está usando un enfoque tipo **GitHub Flow + Conventional Commits**:
+- Ramas por propósito: `feat/*`, `fix/*`, `docs/*`, `chore/*`
+- Commits claros: `feat: ...`, `fix: ...`, `docs: ...`, `chore: ...`, `merge: ...`
+- PR por cambio acotado
 
-The project includes `vercel.json` and is ready to deploy:
+### Mejoras futuras
+- Drag & drop para reordenar tareas
+- Etiquetas y filtros inteligentes
+- Integración con backend real
+- Autenticación y roles
+- Mayor cobertura de tests automatizados
 
-1. Link/import repository in Vercel.
-2. Build command: `npm run build`
-3. Output directory: `dist/taskflow/browser`
-4. Deploy.
+---
 
-## Future Improvements
+## 🇺🇸 English
 
-- Drag and drop task ordering
-- Advanced analytics dashboard
-- Tag system and smart filters
-- Cloud sync with backend auth
-- Expanded automated tests (services + components)
+<details>
+  <summary>Open English version</summary>
+
+### Description
+**TaskFlow** is a portfolio project focused on frontend quality, clean architecture, and UX.
+It includes a modern SaaS-like dark UI with full CRUD flow, filtering, LocalStorage persistence, and bilingual support.
+
+### Local demo
+- URL: `http://localhost:4200` (or `http://localhost:4300` if port 4200 is busy)
+
+### Live demo
+- Vercel: [https://taskflow-nu-mocha.vercel.app](https://taskflow-nu-mocha.vercel.app)
+
+### Author
+**Felipe Torres**
+
+### Main features
+- Full task CRUD (create, edit, delete, complete/reopen)
+- Task model: `id`, `title`, `description`, `status`, `priority`, `dueDate`, `createdAt`
+- Search and filters (title/description, status, priority)
+- Sorting (created date and due date)
+- LocalStorage persistence and restore on reload
+- Bilingual UI (Spanish/English) for labels, statuses, priorities
+- Modal-based create/edit workflow
+- Delete confirmation dialog
+- Smooth modal animations
+- Responsive layout (desktop, tablet, mobile)
+- Explicit validations in create mode; non-intrusive edit mode
+
+### Tech stack
+- Angular (standalone components)
+- TypeScript
+- Modern CSS
+- Reactive Forms
+- LocalStorage
+
+### Setup
+```bash
+npm install
+npm start
+```
+
+### Build and test
+```bash
+npm run build
+npx ng test --watch=false
+```
+
+</details>
