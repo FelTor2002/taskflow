@@ -1,59 +1,114 @@
-# Taskflow
+# TaskFlow
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.7.
+Professional Angular + TypeScript task manager for portfolio use, focused on clean architecture, CRUD workflows, local persistence, responsive UI, and bilingual experience (ES/EN).
 
-## Development server
+Aplicación profesional de gestión de tareas con Angular + TypeScript para portafolio, enfocada en arquitectura limpia, flujos CRUD, persistencia local, UI responsive y experiencia bilingüe (ES/EN).
 
-To start a local development server, run:
+## Demo
 
-```bash
-ng serve
+- Live demo (placeholder): `https://taskflow-demo.vercel.app`
+
+## Author
+
+- Felipe Torres
+
+## Tech Stack
+
+- Angular 21
+- TypeScript
+- Reactive Forms
+- Modern CSS (dark SaaS-style UI)
+- LocalStorage
+
+## Features (EN)
+
+- Full CRUD task management: create, edit, delete, complete/reopen
+- Task model with `id`, `title`, `description`, `status`, `priority`, `dueDate`, `createdAt`
+- Search by title/description
+- Filters by status and priority
+- Sorting by creation date and due date
+- Persistent state in LocalStorage
+- Built-in language switcher (`ES` / `EN`)
+- Responsive layout for desktop, tablet, and mobile
+- Confirmation dialog before deleting
+
+## Funcionalidades (ES)
+
+- CRUD completo de tareas: crear, editar, eliminar, completar/reabrir
+- Modelo de tarea con `id`, `title`, `description`, `status`, `priority`, `dueDate`, `createdAt`
+- Búsqueda por título y descripción
+- Filtros por estado y prioridad
+- Ordenamiento por fecha de creación y fecha límite
+- Persistencia en LocalStorage
+- Selector de idioma integrado (`ES` / `EN`)
+- Diseño responsive para desktop, tablet y móvil
+- Confirmación antes de eliminar
+
+## Project Structure
+
+```text
+src/
+  app/
+    components/
+      task-card/
+      task-filters/
+      task-form/
+    i18n/
+      translations.ts
+    models/
+      interfaces/
+        task.model.ts
+    services/
+      i18n.service.ts
+      task.service.ts
+    app.ts
+    app.html
+    app.css
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Installation
 
 ```bash
-ng generate component component-name
+npm install
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Development Commands
 
 ```bash
-ng generate --help
+# Run dev server
+npm run start
+
+# Production build
+npm run build
+
+# Unit tests
+npm run test
 ```
 
-## Building
-
-To build the project run:
+## Build
 
 ```bash
-ng build
+npm run build
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Build output:
 
-## Running unit tests
+- `dist/taskflow/browser`
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+## Vercel Deploy
 
-```bash
-ng test
-```
+1. Push this project to GitHub.
+2. Import repository in Vercel.
+3. Use:
+   - Framework preset: `Other`
+   - Build command: `npm run build`
+   - Output directory: `dist/taskflow/browser`
+4. Deploy.
 
-## Running end-to-end tests
+## Future Improvements
 
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- Drag and drop task ordering
+- Advanced analytics dashboard
+- Tag system and smart filters
+- Cloud sync with backend auth
+- Automated test suite expansion (service + component interaction)
