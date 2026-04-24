@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, HostListener, computed, inject, signal } from '@angular/core';
 
 import { TaskCardComponent } from './components/task-card/task-card.component';
 import { TaskFiltersComponent, TaskFilterState } from './components/task-filters/task-filters.component';
@@ -110,5 +110,12 @@ export class App {
 
   setLanguage(language: Language): void {
     this.i18n.setLanguage(language);
+  }
+
+  @HostListener('document:keydown.escape')
+  handleEscape(): void {
+    if (this.isTaskModalOpen()) {
+      this.closeTaskModal();
+    }
   }
 }

@@ -37,11 +37,24 @@ select {
   background: #111626;
   color: #f5f8ff;
   font: inherit;
+  transition: border-color 0.2s ease;
 }
 
 textarea {
   resize: vertical;
   min-height: 5rem;
+}
+
+input.invalid,
+textarea.invalid,
+select.invalid {
+  border-color: #d95d7a;
+}
+
+.error {
+  color: #ff98b1;
+  font-size: 0.78rem;
+  line-height: 1.2;
 }
 
 .actions {

@@ -2,7 +2,15 @@
   <div class="form-grid">
     <label>
       <span>{{ i18n.t('title') }}</span>
-      <input formControlName="title" type="text" [placeholder]="i18n.t('titlePlaceholder')" />
+      <input
+        formControlName="title"
+        type="text"
+        [placeholder]="i18n.t('titlePlaceholder')"
+        [class.invalid]="isInvalid('title')"
+      />
+      @if (isInvalid('title')) {
+        <small class="error">{{ errorMessage('title') }}</small>
+      }
     </label>
 
     <label>
@@ -11,7 +19,11 @@
         formControlName="description"
         rows="3"
         [placeholder]="i18n.t('descriptionPlaceholder')"
+        [class.invalid]="isInvalid('description')"
       ></textarea>
+      @if (isInvalid('description')) {
+        <small class="error">{{ errorMessage('description') }}</small>
+      }
     </label>
 
     <label>
@@ -34,7 +46,10 @@
 
     <label>
       <span>{{ i18n.t('dueDate') }}</span>
-      <input formControlName="dueDate" type="date" />
+      <input formControlName="dueDate" type="date" [class.invalid]="isInvalid('dueDate')" />
+      @if (isInvalid('dueDate')) {
+        <small class="error">{{ errorMessage('dueDate') }}</small>
+      }
     </label>
   </div>
 

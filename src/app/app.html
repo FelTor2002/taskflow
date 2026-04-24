@@ -48,18 +48,17 @@
   </section>
 </main>
 
-@if (isTaskModalOpen()) {
-  <div class="modal-backdrop" (click)="closeTaskModal()">
-    <section class="modal-panel" (click)="$event.stopPropagation()">
-      <div class="modal-head">
-        <h2>{{ selectedTask() ? i18n.t('editTask') : i18n.t('createTask') }}</h2>
-        <button class="close-btn" type="button" (click)="closeTaskModal()">X</button>
-      </div>
-      <app-task-form
-        [task]="selectedTask()"
-        (save)="saveTask($event)"
-        (cancel)="closeTaskModal()"
-      />
-    </section>
-  </div>
-}
+<div
+  class="modal-backdrop"
+  [class.is-open]="isTaskModalOpen()"
+  [attr.aria-hidden]="!isTaskModalOpen()"
+  (click)="closeTaskModal()"
+>
+  <section class="modal-panel" (click)="$event.stopPropagation()">
+    <div class="modal-head">
+      <h2>{{ selectedTask() ? i18n.t('editTask') : i18n.t('createTask') }}</h2>
+      <button class="close-btn" type="button" (click)="closeTaskModal()">X</button>
+    </div>
+    <app-task-form [task]="selectedTask()" (save)="saveTask($event)" (cancel)="closeTaskModal()" />
+  </section>
+</div>
